@@ -6,6 +6,7 @@ from app.core.config import settings
 from app.core.database import engine, Base
 from app.core.firebase import init_firebase
 from app.routers import auth, instruments, paper, algo, stream, notifications, admin
+import app.models
 import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")

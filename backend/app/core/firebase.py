@@ -18,19 +18,30 @@ def init_firebase():
         from firebase_admin import credentials
         
         creds_json = settings.FIREBASE_CREDENTIALS_JSON
-        if creds_json and os.path.exists(creds_json):
+        if not creds_json:
+            logger.warning("FIREBASE_CREDENTIALS_JSON not provided. Running FCM in sandbox/simulated mode.")
+            return
+
+        if isinstance(creds_json, dict):
             cred = credentials.Certificate(creds_json)
             firebase_admin.initialize_app(cred)
             _firebase_initialized = True
-            logger.info("Firebase Admin SDK initialized successfully via service account JSON file.")
-        elif creds_json and creds_json.startswith("{"):
-            cred_dict = json.loads(creds_json)
-            cred = credentials.Certificate(cred_dict)
-            firebase_admin.initialize_app(cred)
-            _firebase_initialized = True
-            logger.info("Firebase Admin SDK initialized successfully via inline JSON environment variable.")
-        else:
-            logger.warning("FIREBASE_CREDENTIALS_JSON not provided. Running FCM in sandbox/simulated mode.")
+            logger.info("Firebase Admin SDK initialized successfully via parsed dict.")
+        elif isinstance(creds_json, str):
+            creds_str = creds_json.strip()
+            if creds_str.startswith("{"):
+                cred_dict = json.loads(creds_str)
+                cred = credentials.Certificate(cred_dict)
+                firebase_admin.initialize_app(cred)
+                _firebase_initialized = True
+                logger.info("Firebase Admin SDK initialized successfully via inline JSON string.")
+            elif os.path.exists(creds_str):
+                cred = credentials.Certificate(creds_str)
+                firebase_admin.initialize_app(cred)
+                _firebase_initialized = True
+                logger.info("Firebase Admin SDK initialized successfully via service account JSON file.")
+            else:
+                logger.warning("FIREBASE_CREDENTIALS_JSON path not found. Running FCM in sandbox mode.")
     except Exception as e:
         logger.warning(f"Firebase initialization skipped: {e}. Running FCM in simulated mode.")
 
