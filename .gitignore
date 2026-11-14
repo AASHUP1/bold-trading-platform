@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+*.pyc
+__pycache__/
+.pytest_cache/
+.vite/
+
+# Android / Gradle
+.gradle/
+build/
+*/build/
+*/*/build/
+*.apk
+*.aab
+local.properties
+.idea/
+*.iml
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Secrets & Private Keys
+backend/firebase-service-account.json
+*firebase-adminsdk*.json
+*service-account*.json
+*.pem
+*.key

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: bold-trading-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    region: singapore # Nearest low-latency region to NSE/BSE (India)
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # Set in Render dashboard with your free Supabase/Neon PostgreSQL URL
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FREE_LAUNCH_ACTIVE
+        value: "true"
+      - key: FIREBASE_PROJECT_ID
+        value: trading-app-19c14
