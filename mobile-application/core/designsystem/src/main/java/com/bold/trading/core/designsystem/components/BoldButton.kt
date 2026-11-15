@@ -21,9 +21,13 @@ import com.bold.trading.core.designsystem.theme.BoldColors
 
 enum class ButtonVariant {
     Primary,
+    Secondary,
     Destructive,
-    Outline
+    Outline,
+    Outlined
 }
+
+typealias BoldButtonVariant = ButtonVariant
 
 @Composable
 fun BoldButton(
@@ -36,13 +40,14 @@ fun BoldButton(
 ) {
     val containerColor = when (variant) {
         ButtonVariant.Primary -> BoldColors.PrimaryBullish
+        ButtonVariant.Secondary -> BoldColors.SurfaceCard
         ButtonVariant.Destructive -> BoldColors.AccentBearish
-        ButtonVariant.Outline -> Color.Transparent
+        ButtonVariant.Outline, ButtonVariant.Outlined -> Color.Transparent
     }
 
     val contentColor = when (variant) {
         ButtonVariant.Primary, ButtonVariant.Destructive -> BoldColors.BgApp
-        ButtonVariant.Outline -> BoldColors.TextPrimary
+        ButtonVariant.Secondary, ButtonVariant.Outline, ButtonVariant.Outlined -> BoldColors.TextPrimary
     }
 
     Button(

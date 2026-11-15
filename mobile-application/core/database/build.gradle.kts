@@ -30,8 +30,8 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     // Room SQLite
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
+    api(libs.androidx.room.runtime)
+    api(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)

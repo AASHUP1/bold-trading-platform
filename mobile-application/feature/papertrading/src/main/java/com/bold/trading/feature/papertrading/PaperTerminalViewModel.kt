@@ -58,7 +58,16 @@ class PaperTerminalViewModel(
         _selectedTab,
         _activeTicketInstrument,
         _lastFillReceipt
-    ) { account, positions, ledger, tab, ticketInst, receipt ->
+    ) { args: Array<Any?> ->
+        val account = args[0] as? com.bold.trading.core.database.entity.PaperAccountEntity
+        @Suppress("UNCHECKED_CAST")
+        val positions = (args[1] as? List<com.bold.trading.core.database.entity.CachedPaperPositionEntity>) ?: emptyList()
+        @Suppress("UNCHECKED_CAST")
+        val ledger = (args[2] as? List<com.bold.trading.core.database.entity.LedgerEntryEntity>) ?: emptyList()
+        val tab = args[3] as PaperTab
+        val ticketInst = args[4] as? CachedInstrumentEntity
+        val receipt = args[5] as? FillReceipt
+
         PaperUiState(
             account = account,
             positions = positions,

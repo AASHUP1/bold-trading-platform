@@ -16,3 +16,6 @@ data class PaperAccountEntity(
     val unrealizedPnl: BigDecimal = BigDecimal("0.00"),
     val createdAtEpoch: Long = System.currentTimeMillis()
 )
+
+val PaperAccountEntity.virtualCashBalance: BigDecimal
+    get() = availableCash

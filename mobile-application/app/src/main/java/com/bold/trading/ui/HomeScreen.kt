@@ -148,8 +148,8 @@ fun HomeScreen(
                             fontFamily = FontFamily.Monospace
                         )
                         Text(
-                            text = CurrencyFormatter.formatPercentage(nifty?.changePercent ?: 0.65),
-                            color = if ((nifty?.changePercent ?: 0.0) >= 0) BoldColors.PrimaryBullish else BoldColors.AccentBearish,
+                            text = CurrencyFormatter.formatPercentage(nifty?.changePercent ?: BigDecimal("0.65")),
+                            color = if ((nifty?.changePercent ?: BigDecimal.ZERO) >= BigDecimal.ZERO) BoldColors.PrimaryBullish else BoldColors.AccentBearish,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace
@@ -168,8 +168,8 @@ fun HomeScreen(
                             fontFamily = FontFamily.Monospace
                         )
                         Text(
-                            text = CurrencyFormatter.formatPercentage(bankNifty?.changePercent ?: 0.42),
-                            color = if ((bankNifty?.changePercent ?: 0.0) >= 0) BoldColors.PrimaryBullish else BoldColors.AccentBearish,
+                            text = CurrencyFormatter.formatPercentage(bankNifty?.changePercent ?: BigDecimal("0.42")),
+                            color = if ((bankNifty?.changePercent ?: BigDecimal.ZERO) >= BigDecimal.ZERO) BoldColors.PrimaryBullish else BoldColors.AccentBearish,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Monospace
@@ -205,7 +205,7 @@ fun HomeScreen(
 
             // Dynamic Watchlist Items (Flow from Room SQLite)
             items(instruments, key = { it.symbol }) { inst ->
-                val isBull = inst.changePercent >= 0
+                val isBull = inst.changePercent >= BigDecimal.ZERO
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

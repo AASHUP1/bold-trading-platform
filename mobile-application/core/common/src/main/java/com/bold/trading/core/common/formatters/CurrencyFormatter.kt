@@ -29,6 +29,15 @@ object CurrencyFormatter {
         return formatInr(BigDecimal.valueOf(amountDouble))
     }
 
+    fun formatInr(amountLong: Long): String {
+        return formatInr(BigDecimal.valueOf(amountLong))
+    }
+
+    fun formatRupees(amount: BigDecimal): String = formatInr(amount)
+    fun formatRupees(amount: Double): String = formatInr(amount)
+    fun formatRupees(amount: Long): String = formatInr(amount)
+    fun formatRupees(amount: Number): String = formatInr(BigDecimal(amount.toString()))
+
     /**
      * Compact Indian denominations: 12.4L, 2.5Cr, or raw format
      */
@@ -50,6 +59,9 @@ object CurrencyFormatter {
         }
     }
 
+    fun formatCompact(amount: Long): String = formatCompact(BigDecimal.valueOf(amount))
+    fun formatCompact(amount: Double): String = formatCompact(BigDecimal.valueOf(amount))
+
     /**
      * Formats positive/negative percentages with sign: "+1.25%", "-0.40%"
      */
@@ -57,4 +69,16 @@ object CurrencyFormatter {
         val sign = if (changePercent > 0) "+" else ""
         return "$sign${String.format(Locale.US, "%.2f", changePercent)}%"
     }
+
+    fun formatPercentage(changePercent: BigDecimal): String = formatPercentage(changePercent.toDouble())
+    fun formatPercentage(changePercent: Float): String = formatPercentage(changePercent.toDouble())
 }
+
+fun formatRupees(amount: BigDecimal): String = CurrencyFormatter.formatRupees(amount)
+fun formatRupees(amount: Double): String = CurrencyFormatter.formatRupees(amount)
+fun formatRupees(amount: Long): String = CurrencyFormatter.formatRupees(amount)
+fun formatRupees(amount: Number): String = CurrencyFormatter.formatRupees(amount)
+fun formatCompact(amount: Long): String = CurrencyFormatter.formatCompact(amount)
+fun formatCompact(amount: BigDecimal): String = CurrencyFormatter.formatCompact(amount)
+fun formatPercentage(changePercent: BigDecimal): String = CurrencyFormatter.formatPercentage(changePercent)
+fun formatPercentage(changePercent: Double): String = CurrencyFormatter.formatPercentage(changePercent)

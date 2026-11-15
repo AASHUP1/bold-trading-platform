@@ -226,7 +226,7 @@ fun DashboardScreen(
 
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        val balance = state.paperAccount?.virtualCashBalance ?: BigDecimal("1000000.00")
+                        val balance = state.paperAccount?.availableCash ?: BigDecimal("1000000.00")
                         val pnl = state.paperAccount?.realizedPnl ?: BigDecimal("24500.00")
                         val isPnlBullish = pnl >= BigDecimal.ZERO
 

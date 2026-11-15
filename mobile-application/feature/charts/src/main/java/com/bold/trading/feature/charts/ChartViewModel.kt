@@ -64,7 +64,7 @@ class ChartViewModel(
                                 high = c.high.toFloat(),
                                 low = c.low.toFloat(),
                                 close = c.close.toFloat(),
-                                volume = c.volume.toFloat()
+                                volume = c.volume
                             )
                         }
                     } else {

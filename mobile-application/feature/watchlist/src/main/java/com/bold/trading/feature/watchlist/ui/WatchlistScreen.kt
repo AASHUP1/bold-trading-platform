@@ -50,6 +50,7 @@ import com.bold.trading.feature.watchlist.WatchlistViewModel
  * Screen S06: Multi-Watchlist Component with Sparklines & Search Filter.
  * Follows DESIGN.md Section 6: S06 & PLAN.md Task 3.2.
  */
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun WatchlistScreen(
     viewModel: WatchlistViewModel,
