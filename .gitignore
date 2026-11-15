@@ -32,3 +32,6 @@ backend/firebase-service-account.json
 *service-account*.json
 *.pem
 *.key
+*.jks
+*.keystore
+keystore.properties
